@@ -14,4 +14,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" })); // used to encod
 app.use(express.static("public")); // to store the static files like img, pdf into folder
 app.use(cookieParser()); // Just like we use cors
 
+// routes import
+import userRouter from "./routes/user.route.js";
+
+// routes declaration
+app.use("/api/v1/users", userRouter);
+
 export { app };
