@@ -10,7 +10,10 @@ const uploadOnCloudinary = async function (localFilePath) {
     });
 
     console.log("File has been uploaded on cloudinary");
-    console.log(response.url);
+    console.log((await response).url); // Need to use await as response is a promise
+    // I am only being able to unlink if i am awaiting the response before it like in the console what im doing rn.
+    fs.unlinkSync(localFilePath);
+    //The issue arises because cloudinary.uploader.upload is an asynchronous operation that returns a promise, and you need to ensure that the promise is resolved before calling fs.unlinkSync(localFilePath)
     return response;
   } catch (error) {
     fs.unlinkSync(localFilePath);
